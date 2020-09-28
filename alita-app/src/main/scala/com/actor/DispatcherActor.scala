@@ -41,7 +41,6 @@ class DispatcherActor extends AlitaAbstractActor with ActorLogging{
           data.room.setId(e.getKey)
           val roomPath=  data.room.path()
           RoomFactory.incremeWorkLoad(staff.userId)
-          //:todo whether duplicate room actor will be created
           // after assigned success ,to listen the RoomActor running
           mediator!SendToAll(roomAggregatePath,CreateRoom(data.room))
 

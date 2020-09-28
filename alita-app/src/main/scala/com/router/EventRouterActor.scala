@@ -18,7 +18,7 @@ class EventRouterActor extends AlitaAbstractActor {
     case msg@UserInput(CHAT_IN,data,user) =>
       mediator.forward(Send(dispatchActorPath,ServiceAssign(user.role,data,user),true))
     case msg@UserInput(CHAT_MESSAGE,data,user) =>
-      mediator.forward(Send(robotChatActorPath,msg,true))
+      mediator.forward(Send(chatActorPath,msg,true))
     case msg@UserInput(CHAT_REQUEST,data,user) =>
       mediator.forward(Send(dispatchActorPath,ServiceRequest(user),true))
     case msg@UserInput(CHAT_OUT,data,user) =>

@@ -64,7 +64,7 @@ class AlitaSocketIOServer{
   def initEnventListener(mediator:ActorRef,outbound:ActorRef): Unit ={
     implicit val ec = ExecutionContext.global
     //init the user's events
-    val events = List(LOGIN,CHAT_IN,CHAT_MESSAGE,CHAT_OUT,CHAT_REQUEST,"chat:history","chat:typing","user:present","bot:start","bot:end","bot:message","service:request","service:cancel","service:end","staff:checkin","staff:checkout","staff:alive")
+    val events = List(LOGIN,CHAT_IN,CHAT_MESSAGE,CHAT_OUT,CHAT_REQUEST)
     events foreach {
       eventName=>
         socketIOServer.addEventListener(eventName, classOf[Message], new DataListener[Message]{

@@ -18,7 +18,7 @@ abstract class AlitaAbstractActor extends Actor with ActorLogging {
 
   val broadcastActorPath="/user/outbound"
 
-  val robotChatActorPath="/user/backend/robot"
+  val chatActorPath="/user/backend/chat"
 
   val roomAggregatePath="/user/backend/room"
 
@@ -36,12 +36,13 @@ class BackendAggregate extends Actor with ActorLogging{
   override def receive: Receive = {
     case Start() =>
       log.info("loading conversation")
-      mediator!Put(context.actorOf((RoundRobinPool(4).props(ConversationActor.props())),"conversation"))
-      log.info("loading rebotActor")
-      mediator!Put(context.actorOf((RoundRobinPool(4).props(RebotChatActor.props())),"robot"))
+      mediator!Put(context.actorOf(RoundRobinPool(4).props(ConversationActor.props()),"conversation"))
 
-      log.info("loading rebotActor")
-      mediator!Put(context.actorOf((RoundRobinPool(4).props(DispatcherActor.props())),"dispatch"))
+      log.info("loading chatActor")
+      mediator!Put(context.actorOf(RoundRobinPool(4).props(ChatActor.props()),"chat"))
+
+      log.info("loading dispatch")
+      mediator!Put(context.actorOf(RoundRobinPool(4).props(DispatcherActor.props()),"dispatch"))
 
       mediator!Put(context.actorOf(AssignActor.props(), "assign"))
       log.info("loading the room")

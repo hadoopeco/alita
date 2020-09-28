@@ -76,6 +76,10 @@ object RoomFactory {
     incremeWorkLoad(staffId)
   }
 
+  def isPaired(user:User):Boolean ={
+    this.pairs.containsKey(user.userId)
+  }
+
   def incremeWorkLoad(staffId:String) ={
     staffs(staffId).+
   }

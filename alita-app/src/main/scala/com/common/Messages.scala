@@ -12,6 +12,7 @@ object Messages {
 
   //socket io event from user input
   @SerialVersionUID(1L) case class UserInput(event:String,data:Message,user:User)
+  @SerialVersionUID(1L) case class UserRole(event:Boolean,role:String,data:Message)
 
 
 
